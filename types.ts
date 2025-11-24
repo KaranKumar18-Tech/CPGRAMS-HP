@@ -16,6 +16,7 @@ export enum GrievanceStatus {
   IN_PROGRESS = 'In Progress',
   PENDING = 'Pending',
   RESOLVED = 'Resolved',
+  CLOSED = 'Closed',
   REOPENED = 'Reopened',
 }
 
@@ -46,6 +47,18 @@ export interface Grievance {
   isAnonymized: boolean;
   timeline: TimelineEvent[];
   replies: GrievanceReply[];
+  
+  // New fields for detailed status view
+  assignedOfficer?: string;
+  resolution?: string;
+  closingOfficer?: string;
+}
+
+export interface ChatbotData {
+  subject?: string;
+  description?: string;
+  category?: string;
+  district?: string;
 }
 
 export interface StatCardProps {

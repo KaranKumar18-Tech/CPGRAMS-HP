@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'danger' | 'ghost';
@@ -135,6 +135,38 @@ export const Modal: React.FC<{ isOpen: boolean; onClose: () => void; title: stri
           {children}
         </div>
       </div>
+    </div>
+  );
+};
+
+export const Accordion: React.FC<{ items: { title: string; content: string }[] }> = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const toggle = (index: number) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  return (
+    <div className="space-y-2">
+      {items.map((item, index) => (
+        <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            className="w-full px-6 py-4 text-left flex justify-between items-center bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gov-blue"
+            onClick={() => toggle(index)}
+            aria-expanded={activeIndex === index}
+          >
+            <span className="font-semibold text-gray-900">{item.title}</span>
+            <span className="text-gov-blue text-xl transform transition-transform duration-200" style={{ transform: activeIndex === index ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+              &#x2304;
+            </span>
+          </button>
+          {activeIndex === index && (
+            <div className="px-6 py-4 bg-gray-50 text-gray-700 text-sm leading-relaxed border-t border-gray-100">
+              {item.content}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

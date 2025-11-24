@@ -1,4 +1,4 @@
-# Himachal CPGRAMS Portal
+# Himachal Grievance Portal
 
 A frontend prototype for the Himachal Pradesh Public Grievance Redressal Portal.
 
